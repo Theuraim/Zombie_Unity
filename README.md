@@ -7,7 +7,7 @@ Projeto de um jogo introdutório de sobrevivência feito em unity, feito com bas
 </br> <h2>Situação do projeto: </h2>Concluído.
 
 ## ✔️ Técnicas e tecnologias utilizadas
-Unity
-Orientação à Objetos
-C#
+Unity, 
+Orientação à Objetos, 
+C#, 
 WebGL
