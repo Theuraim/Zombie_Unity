@@ -2669,7 +2669,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   TextoGameOver: {fileID: 0}
-  Vivo: 1
+  Vida: 100
 --- !u!114 &2884960051567959985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2698,7 +2698,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!136 &1176244547959951417
 CapsuleCollider:
