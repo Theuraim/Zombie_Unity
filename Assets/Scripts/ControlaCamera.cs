@@ -8,13 +8,13 @@ public class ControlaCamera : MonoBehaviour
     Vector3 distCompensar;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         distCompensar = transform.position - Jogador.transform.position;
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         transform.position = Jogador.transform.position + distCompensar;
     }

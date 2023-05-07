@@ -2582,8 +2582,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4610746654156704}
   - component: {fileID: 2051721947}
+  - component: {fileID: 4074102934772416930}
   - component: {fileID: 2051721945}
+  - component: {fileID: 6701344560496860216}
   - component: {fileID: 2884960051567959985}
+  - component: {fileID: 3441480051095412550}
   - component: {fileID: 2471771028329107893}
   - component: {fileID: 1176244547959951417}
   m_Layer: 0
@@ -2652,6 +2655,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &4074102934772416930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884102019447498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a35c4e7b7112d468c70459f30b414f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2051721945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2664,12 +2679,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b592303a7427a45bbddf38a2c4a12d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Velocidade: 10
   MascaraChao:
     serializedVersion: 2
     m_Bits: 8
   TextoGameOver: {fileID: 0}
-  Vida: 100
+  scriptControlaInterface: {fileID: 0}
+  SomDano: {fileID: 8300000, guid: b57b9cbb75abf354f986beefd1bf29f8, type: 3}
+  statusJogador: {fileID: 0}
+--- !u!114 &6701344560496860216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884102019447498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3974aa092fa49a24b9416e7b542cba12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2884960051567959985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2684,6 +2712,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bala: {fileID: 1194303621723492157, guid: f875abab64c1dec49944899e75176dad, type: 3}
   CanoDaArma: {fileID: 1946593175}
+  Somtiro: {fileID: 8300000, guid: baa3b4dc51f9de2428812df043c80b58, type: 3}
+--- !u!114 &3441480051095412550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884102019447498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbdd37153d2b65141bf8bb2f2d8feb94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidaInicial: 100
+  Vida: 0
+  Velocidade: 8
 --- !u!54 &2471771028329107893
 Rigidbody:
   m_ObjectHideFlags: 0

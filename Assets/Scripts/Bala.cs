@@ -6,6 +6,7 @@ public class Bala : MonoBehaviour
 {
     public float Velocidade = 20;
     private Rigidbody rBody;
+    public int Dano = 1;
 
     private void Start()
     {
@@ -22,7 +23,7 @@ public class Bala : MonoBehaviour
     {
         if (objetoDeColisao.tag == "Inimigo")
         {
-            Destroy(objetoDeColisao.gameObject);
+            objetoDeColisao.GetComponent<ControlaInimigo>().TomarDano(Dano);
         }
 
         Destroy(gameObject);
