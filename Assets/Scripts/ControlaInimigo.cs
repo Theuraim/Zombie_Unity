@@ -13,6 +13,11 @@ public class ControlaInimigo : MonoBehaviour, IMatavel
     private Vector3 direcao;
     private float contadorVagar;
     private float tempoEntrePosicoesAleatorias = 4;
+    private float porcentagemGerarKitMedico = 0.1f;
+    public GameObject KitMedicoPrefab;
+    private ControlaInterface scriptControlaInterface;
+    [HideInInspector]
+    public GeradorZumbis GeraZumbis;
 
     // Start is called before the first frame update
     public void Start()
@@ -22,6 +27,7 @@ public class ControlaInimigo : MonoBehaviour, IMatavel
         movimentoInimigo = GetComponent<MovimentoPersonagem>();
         animacaoInimigo = GetComponent<AnimacaoPersonagem>();
         statusInimigo = GetComponent<Status>();
+        scriptControlaInterface = GameObject.FindObjectOfType(typeof(ControlaInterface)) as ControlaInterface;
 
         //Activating a random zumbi model
         AleatorizarZumbi();
@@ -65,7 +71,7 @@ public class ControlaInimigo : MonoBehaviour, IMatavel
 
     private void AleatorizarZumbi()
     {
-        int geraTipoZumbi = Random.Range(1, 28);
+        int geraTipoZumbi = Random.Range(1, transform.childCount);
         transform.GetChild(geraTipoZumbi).gameObject.SetActive(true);
     }
 
@@ -82,8 +88,14 @@ public class ControlaInimigo : MonoBehaviour, IMatavel
 
     public void Morrer()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, 5);
+        animacaoInimigo.Morrer();
+        this.enabled = false;
+        movimentoInimigo.Morrer();
         ControlaAudio.instancia.PlayOneShot(SomMorte);
+        VerificarGeracaoKitMedico(porcentagemGerarKitMedico);
+        scriptControlaInterface.AtualizarQuantideZumbisMortos();
+        GeraZumbis.DiminuiQuantidadeZumbis();
     }
 
     private void Vagar()
@@ -93,7 +105,7 @@ public class ControlaInimigo : MonoBehaviour, IMatavel
         if (contadorVagar <= 0)
         {
             posicaoAleatoria = AletorizarPosicao();
-            contadorVagar += tempoEntrePosicoesAleatorias;
+            contadorVagar += tempoEntrePosicoesAleatorias + Random.Range(-1f, 1f);
         }
 
         bool chegouPerto = Vector3.Distance(transform.position, posicaoAleatoria) <= 0.05;
@@ -111,5 +123,13 @@ public class ControlaInimigo : MonoBehaviour, IMatavel
         posicao.y = transform.position.y;
 
         return posicao;
+    }
+
+    private void VerificarGeracaoKitMedico(float porcentagemGeracao)
+    {
+        if (Random.value <= porcentagemGeracao)
+        {
+            Instantiate(KitMedicoPrefab, transform.position, Quaternion.identity);
+        }
     }
 }

@@ -8,11 +8,10 @@ public class ControlaArma : MonoBehaviour
     public GameObject CanoDaArma;
     public AudioClip Somtiro;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+//    private void Start()
+//    {
+//        Somtiro = Resources.Load<AudioClip>("Som_Tiro_01.ogg");
+//    }
 
     // Update is called once per frame
     void Update()

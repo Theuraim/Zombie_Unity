@@ -11,16 +11,27 @@ public class GeradorZumbis : MonoBehaviour
     private float distanciaGeracao = 3;
     private float DistanciaJogadorGeracao = 20;
     private GameObject jogador;
+    private int quantidadeMaximaZumbis = 2;
+    private int quantidadeZumbis;
+    private float tempoProximoAumentoDificuldade = 30;
+    private float contadorAumentarDificuldade;
 
     public void Start()
     {
         jogador = GameObject.FindWithTag("Jogador");
+        contadorAumentarDificuldade = tempoProximoAumentoDificuldade;
+
+        for(int i = 0; i < quantidadeMaximaZumbis; i++)
+        {
+            StartCoroutine(GerarNovoZumbi());
+        }
     }
 
     // Update is called once per frame
     public void Update()
     {
-        if (Vector3.Distance(transform.position, jogador.transform.position) > DistanciaJogadorGeracao)
+        bool bGerarZumbisDistancia = Vector3.Distance(transform.position, jogador.transform.position) > DistanciaJogadorGeracao;
+        if ((bGerarZumbisDistancia) && (quantidadeZumbis < quantidadeMaximaZumbis))
         {
             contadorTempo += Time.deltaTime;
 
@@ -29,6 +40,12 @@ public class GeradorZumbis : MonoBehaviour
                 StartCoroutine(GerarNovoZumbi());
                 contadorTempo = 0;
             }
+        }
+
+        if (Time.timeSinceLevelLoad > contadorAumentarDificuldade)
+        {
+            quantidadeMaximaZumbis++;
+            contadorAumentarDificuldade = Time.timeSinceLevelLoad + tempoProximoAumentoDificuldade;
         }
     }
 
@@ -44,7 +61,9 @@ public class GeradorZumbis : MonoBehaviour
             yield return null;
         }
 
-        Instantiate(Zumbi, posicaoCriacao, transform.rotation);
+        ControlaInimigo zumbi = Instantiate(Zumbi, posicaoCriacao, transform.rotation).GetComponent<ControlaInimigo>();
+        zumbi.GeraZumbis = this;
+        quantidadeZumbis++;
     }
 
     public void OnDrawGizmos()
@@ -61,4 +80,9 @@ public class GeradorZumbis : MonoBehaviour
 
         return posicao;
     }
+
+    public void DiminuiQuantidadeZumbis()
+    {
+        quantidadeZumbis--;
+    } 
 }

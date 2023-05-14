@@ -6,10 +6,13 @@ ScriptsOnlyBuild:
     - ControlaArma
     - ControlaAudio
     - ControlaCamera
+    - ControlaChefe
     - ControlaInimigo
     - ControlaInterface
     - ControlaJogador
+    - GeradorChefe
     - GeradorZumbis
+    - KitMedico
     - MovimentoJogador
     - MovimentoPersonagem
     - Status
@@ -25,11 +28,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnimatorStateTransitionInspector
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -131,57 +131,63 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1546}
+      Script: {instanceID: 1548}
     - Class: 114
-      Script: {instanceID: 2212}
+      Script: {instanceID: 2214}
     - Class: 114
-      Script: {instanceID: 2658}
+      Script: {instanceID: 2660}
     - Class: 114
-      Script: {instanceID: 2886}
+      Script: {instanceID: 2888}
     - Class: 114
-      Script: {instanceID: 3086}
+      Script: {instanceID: 2902}
     - Class: 114
       Script: {instanceID: 3090}
     - Class: 114
-      Script: {instanceID: 3192}
+      Script: {instanceID: 3094}
     - Class: 114
-      Script: {instanceID: 4154}
+      Script: {instanceID: 3196}
     - Class: 114
-      Script: {instanceID: 4270}
+      Script: {instanceID: 3636}
     - Class: 114
-      Script: {instanceID: 4550}
+      Script: {instanceID: 4162}
     - Class: 114
-      Script: {instanceID: 4668}
+      Script: {instanceID: 4278}
     - Class: 114
-      Script: {instanceID: 5250}
+      Script: {instanceID: 4558}
     - Class: 114
-      Script: {instanceID: 5252}
+      Script: {instanceID: 4676}
     - Class: 114
-      Script: {instanceID: 5340}
+      Script: {instanceID: 5260}
     - Class: 114
-      Script: {instanceID: 5622}
+      Script: {instanceID: 5262}
     - Class: 114
-      Script: {instanceID: 5662}
+      Script: {instanceID: 5350}
     - Class: 114
-      Script: {instanceID: 5960}
+      Script: {instanceID: 5632}
     - Class: 114
-      Script: {instanceID: 6120}
+      Script: {instanceID: 5672}
     - Class: 114
-      Script: {instanceID: 6474}
+      Script: {instanceID: 5968}
     - Class: 114
-      Script: {instanceID: 7338}
+      Script: {instanceID: 5974}
     - Class: 114
-      Script: {instanceID: 7552}
+      Script: {instanceID: 6132}
     - Class: 114
-      Script: {instanceID: 7600}
+      Script: {instanceID: 6354}
     - Class: 114
-      Script: {instanceID: 64980}
+      Script: {instanceID: 6488}
     - Class: 114
-      Script: {instanceID: 65488}
+      Script: {instanceID: 6982}
     - Class: 114
-      Script: {instanceID: 65750}
+      Script: {instanceID: 7354}
     - Class: 114
-      Script: {instanceID: 91028}
+      Script: {instanceID: 7568}
+    - Class: 114
+      Script: {instanceID: 7616}
+    - Class: 114
+      Script: {instanceID: 8234}
+    - Class: 114
+      Script: {instanceID: 27660}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -194,6 +200,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
+    - Class: 195
+      Script: {instanceID: 0}
     - Class: 196
       Script: {instanceID: 0}
     - Class: 213
@@ -203,6 +211,8 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
+      Script: {instanceID: 0}
+    - Class: 238
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -387,6 +397,12 @@ ScriptsOnlyBuild:
     className: GraphicRaycaster
   - hash:
       serializedVersion: 2
+      Hash: 48d89c29c4553aea2babbf8a6a7b8595
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ControlaChefe
+  - hash:
+      serializedVersion: 2
       Hash: f40fedccd4adbc76605bea6d67537e4b
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -435,7 +451,7 @@ ScriptsOnlyBuild:
     className: ControlaCamera
   - hash:
       serializedVersion: 2
-      Hash: 3a24ee82058cba01fb3af636d05926af
+      Hash: f0a83f3a2fe1ecf00a21b80e211c4d2b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ControlaInimigo
@@ -541,6 +557,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnControllerColliderHitMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MovimentoPersonagem
   - hash:
       serializedVersion: 2
       Hash: 27ec3360f0c0a6803ba71cc3106480b8
@@ -873,7 +895,7 @@ ScriptsOnlyBuild:
     className: Text
   - hash:
       serializedVersion: 2
-      Hash: aca6d9ff2b5fe7ddc3d08fa9be00a3b6
+      Hash: 6a34ebf90069029aaed138acf08a24e0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ControlaInterface
@@ -889,6 +911,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
     className: Benchmark02
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: KitMedico
   - hash:
       serializedVersion: 2
       Hash: a1aa98c78061c6f03a8c124cda576e67
@@ -925,6 +953,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnMouseUpAsButtonMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AnimacaoPersonagem
   - hash:
       serializedVersion: 2
       Hash: 6663435805926faf16934aed992cd26b
@@ -1003,6 +1037,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 2f9916ee4ffe632aee42f1202d5c2ce9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Status
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1197,6 +1237,12 @@ ScriptsOnlyBuild:
     className: VertexZoom
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MovimentoJogador
+  - hash:
+      serializedVersion: 2
       Hash: 8220b46879dc5e37db1b940c938f5744
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1233,28 +1279,10 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 1b501e56c0d7863ba75d135a662a4d6a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: MovimentoPersonagem
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: AnimacaoPersonagem
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: MovimentoJogador
-  - hash:
-      serializedVersion: 2
-      Hash: 2f9916ee4ffe632aee42f1202d5c2ce9
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Status
+    className: GeradorChefe
   platform: 20
   scenePathNames:
   - Assets/Scenes/MainScene.unity

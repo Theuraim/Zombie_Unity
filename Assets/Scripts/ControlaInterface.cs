@@ -12,6 +12,8 @@ public class ControlaInterface : MonoBehaviour
     public Text TextoTempoSobrevivencia;
     public Text TextoPontuacaoMaxima;
     private float tempoPontuacaoSalvo;
+    public int quantidadeZumbisMortos;
+    public Text TextoQuantidadeDeZumbisMortos;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,12 @@ public class ControlaInterface : MonoBehaviour
     public void AtualizarVidaJogador()
     {
         SliderVidaJogador.value = scriptControlaJogador.statusJogador.Vida;
+    }
+
+    public void AtualizarQuantideZumbisMortos()
+    {
+        quantidadeZumbisMortos++;
+        TextoQuantidadeDeZumbisMortos.text = string.Format("x {0}", quantidadeZumbisMortos);
     }
 
     public void GameOver()
