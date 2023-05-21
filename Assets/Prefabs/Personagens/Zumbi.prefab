@@ -662,6 +662,7 @@ MonoBehaviour:
   SomMorte: {fileID: 8300000, guid: fd79d8b376233c24c90764a6ca8f0c7d, type: 3}
   KitMedicoPrefab: {fileID: 1060151288946202, guid: 6150c6f66b7034ec5b3672478195682a, type: 3}
   GeraZumbis: {fileID: 0}
+  ParticulaSangueZumbi: {fileID: 3453775591111724920, guid: cfc859f27c868d042aae4d49893c19c3, type: 3}
 --- !u!54 &3233689689763002203
 Rigidbody:
   m_ObjectHideFlags: 0
