@@ -22,9 +22,9 @@ public class MovimentoPersonagem : MonoBehaviour
         this.Direcao = direcao;
     }
 
-    public void Movimentar(float velocidade)
+    public void Movimentar(float velocidade, bool bMovJogador = false)
     {   
-        rBody.MovePosition(rBody.position + (this.Direcao.normalized * velocidade * Time.deltaTime));
+        rBody.MovePosition(rBody.position + ((bMovJogador? this.Direcao : this.Direcao.normalized) * velocidade * Time.deltaTime));
     }
 
     public void Rotacionar(Vector3 direcao)
