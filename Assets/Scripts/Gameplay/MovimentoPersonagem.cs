@@ -14,7 +14,7 @@ public class MovimentoPersonagem : MonoBehaviour
 
     public void SetDirecao(Vector2 direcao)
     {
-        this.Direcao = new Vector3(direcao.x, 0.0f, direcao.y);
+        this.Direcao = new Vector3(direcao.x, 0, direcao.y);
     }
 
     public void SetDirecao(Vector3 direcao)

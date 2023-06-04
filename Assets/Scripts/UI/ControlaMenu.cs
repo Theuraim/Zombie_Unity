@@ -9,7 +9,7 @@ public class ControlaMenu : MonoBehaviour
 
     private void Start()
     {
-        #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_ANDROID
+        #if UNITY_STANDALONE || UNITY_EDITOR
             btnSair.SetActive(true);
         #endif
     }
@@ -36,7 +36,7 @@ public class ControlaMenu : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         Application.Quit();
-        #if UNITY_EDITOR || UNITY_ANDROID
+        #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }

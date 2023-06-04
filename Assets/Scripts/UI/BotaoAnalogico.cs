@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class BotaoAnalogico : MonoBehaviour, IDragHandler
+public class BotaoAnalogico : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
     [SerializeField]
     private RectTransform imagemFundo;
@@ -50,6 +50,18 @@ public class BotaoAnalogico : MonoBehaviour, IDragHandler
         RectTransformUtility.ScreenPointToLocalPointInRectangle(imagemFundo, dadosMouse.position, dadosMouse.enterEventCamera, out posicao);
 
         return posicao;
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        this.PosicionarJoystick(Vector2.zero);
+
+        this.QuandoMudarValor.Invoke(Vector2.zero);
+    }
+
+    public void OnPointerDown(PointerEventData dadosMouse)
+    {
+        this.OnDrag(dadosMouse);
     }
 }
 
