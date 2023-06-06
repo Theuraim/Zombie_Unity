@@ -11,6 +11,9 @@ public class GeradorChefe : MonoBehaviour
     public Transform[] PosicoesGeracao;
     private Transform jogador;
 
+    [SerializeField]
+    private ReservaFixa reservaChefe;
+
     private void Start()
     {
         tempoParaProximaGeracao = tempoEntreGeracoes;
@@ -22,10 +25,15 @@ public class GeradorChefe : MonoBehaviour
     {
         if (Time.timeSinceLevelLoad > tempoParaProximaGeracao)
         {
-            Vector3 posicaoCriacao = CalcularPosicao();
-            Instantiate(ChefePrefab, posicaoCriacao, Quaternion.identity);
-            scriptControlaInterface.AparecerTextoChefe();
-            tempoParaProximaGeracao = Time.timeSinceLevelLoad + tempoEntreGeracoes;
+            if (this.reservaChefe.TemObjeto())
+            {
+                Vector3 posicaoCriacao = CalcularPosicao();
+                var chefe = this.reservaChefe.PegarObjeto();
+                ControlaChefe controleChefe = chefe.GetComponent<ControlaChefe>();
+                controleChefe.SetPosicao(posicaoCriacao);
+                scriptControlaInterface.AparecerTextoChefe();
+                tempoParaProximaGeracao = Time.timeSinceLevelLoad + tempoEntreGeracoes;
+            }
         }
     }
 

@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bala : MonoBehaviour
+public class Bala : MonoBehaviour, IReservavel
 {
     public float Velocidade = 20;
     private Rigidbody rBody;
     public int Dano = 1;
+
+    private IReservaObjetos reserva;
+
+    public void SetReserva(IReservaObjetos reserva)
+    {
+        this.reserva = reserva;
+    } 
 
     private void Start()
     {
@@ -38,6 +45,21 @@ public class Bala : MonoBehaviour
             break;
         }
 
-        Destroy(gameObject);
+        Invoke("VoltarReserva", 5);
+    }
+
+    private void VoltarReserva()
+    {
+        this.reserva.DevolverObjeto(this.gameObject);
+    }
+
+    public void AoEntrarNaReserva()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    public void AoSairDaReserva()
+    {
+        this.gameObject.SetActive(true);
     }
 }

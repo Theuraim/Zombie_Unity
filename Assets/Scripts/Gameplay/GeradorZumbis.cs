@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class GeradorZumbis : MonoBehaviour
 {
-    public GameObject Zumbi;
+    [SerializeField]
+    private ReservaFixa reserva;
     private float contadorTempo = 0;
     public float TempoGerarZumbi = 1;
     public LayerMask LayerZumbi;
     private float distanciaGeracao = 3;
     private float DistanciaJogadorGeracao = 20;
     private GameObject jogador;
-    private int quantidadeMaximaZumbis = 2;
-    private int quantidadeZumbis;
     private float tempoProximoAumentoDificuldade = 30;
     private float contadorAumentarDificuldade;
 
@@ -20,18 +19,13 @@ public class GeradorZumbis : MonoBehaviour
     {
         jogador = GameObject.FindWithTag("Jogador");
         contadorAumentarDificuldade = tempoProximoAumentoDificuldade;
-
-        for(int i = 0; i < quantidadeMaximaZumbis; i++)
-        {
-            StartCoroutine(GerarNovoZumbi());
-        }
     }
 
     // Update is called once per frame
     public void Update()
     {
         bool bGerarZumbisDistancia = Vector3.Distance(transform.position, jogador.transform.position) > DistanciaJogadorGeracao;
-        if ((bGerarZumbisDistancia) && (quantidadeZumbis < quantidadeMaximaZumbis))
+        if (bGerarZumbisDistancia)
         {
             contadorTempo += Time.deltaTime;
 
@@ -44,7 +38,6 @@ public class GeradorZumbis : MonoBehaviour
 
         if (Time.timeSinceLevelLoad > contadorAumentarDificuldade)
         {
-            quantidadeMaximaZumbis++;
             contadorAumentarDificuldade = Time.timeSinceLevelLoad + tempoProximoAumentoDificuldade;
         }
     }
@@ -61,9 +54,12 @@ public class GeradorZumbis : MonoBehaviour
             yield return null;
         }
 
-        ControlaInimigo zumbi = Instantiate(Zumbi, posicaoCriacao, transform.rotation).GetComponent<ControlaInimigo>();
-        zumbi.GeraZumbis = this;
-        quantidadeZumbis++;
+        if (this.reserva.TemObjeto()) { 
+            GameObject zumbi = this.reserva.PegarObjeto();
+            zumbi.transform.position = posicaoCriacao;
+            var controleZumbi = zumbi.GetComponent<ControlaInimigo>();
+            controleZumbi.GeraZumbis = this;
+        }
     }
 
     public void OnDrawGizmos()
@@ -80,9 +76,4 @@ public class GeradorZumbis : MonoBehaviour
 
         return posicao;
     }
-
-    public void DiminuiQuantidadeZumbis()
-    {
-        quantidadeZumbis--;
-    } 
 }

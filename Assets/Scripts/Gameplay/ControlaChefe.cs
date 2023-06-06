@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class ControlaChefe : MonoBehaviour, IMatavel
+public class ControlaChefe : MonoBehaviour, IMatavel, IReservavel
 {
     private Transform jogador;
     private NavMeshAgent agente;
@@ -17,16 +17,28 @@ public class ControlaChefe : MonoBehaviour, IMatavel
     public Color CorDaVidaMaxima, CorDaVidaMinima;
     public GameObject ParticulaSangueZumbi;
 
+    private IReservaObjetos reserva;
+
+    private void Awake()
+    {
+        animacaoChefe = GetComponent<AnimacaoPersonagem>();
+        movimentoChefe = GetComponent<MovimentoPersonagem>();
+        agente = GetComponent<NavMeshAgent>();
+        statusChefe = GetComponent<Status>();
+    }
+
     private void Start()
     {
         jogador = GameObject.FindWithTag("Jogador").transform;
-        agente = GetComponent<NavMeshAgent>();
-        statusChefe = GetComponent<Status>();
         agente.speed = statusChefe.Velocidade;
-        animacaoChefe = GetComponent<AnimacaoPersonagem>();
-        movimentoChefe = GetComponent<MovimentoPersonagem>();
         sliderVidaChefe.maxValue = statusChefe.VidaInicial;
         AtualizarInterface();
+    }
+
+    public void SetPosicao(Vector3 posicao)
+    {
+        this.transform.position = posicao;
+        this.agente.Warp(posicao);
     }
 
     private void Update()
@@ -75,7 +87,12 @@ public class ControlaChefe : MonoBehaviour, IMatavel
         this.enabled = false;
         agente.enabled = false;
         Instantiate(KitMedicoPrefab, transform.position, Quaternion.identity);
-        Destroy(gameObject, 2);
+        Invoke("VoltarReserva", 2);
+    }
+
+    public void VoltarReserva()
+    {
+        this.reserva.DevolverObjeto(this.gameObject);
     }
 
     public void ParticulaSangue(Vector3 posicao, Quaternion rotacao)
@@ -90,5 +107,24 @@ public class ControlaChefe : MonoBehaviour, IMatavel
         Color corDaVida = Color.Lerp(CorDaVidaMinima, CorDaVidaMaxima, porcentagemDaVida);
 
         ImagemSlider.color = corDaVida;
+    }
+
+    public void SetReserva(IReservaObjetos reserva)
+    {
+        this.reserva = reserva;
+    }
+
+    public void AoEntrarNaReserva()
+    {
+        this.gameObject.SetActive(false);
+        this.movimentoChefe.Reiniciar();
+        this.enabled = true;
+        agente.enabled = true;
+        statusChefe.Vida = statusChefe.VidaInicial;
+    }
+
+    public void AoSairDaReserva()
+    {
+        this.gameObject.SetActive(true);
     }
 }

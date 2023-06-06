@@ -8,18 +8,30 @@ public class ControlaArma : MonoBehaviour
     public GameObject CanoDaArma;
     public AudioClip Somtiro;
 
-//    private void Start()
-//    {
-//        Somtiro = Resources.Load<AudioClip>("Som_Tiro_01.ogg");
-//    }
+    [SerializeField]
+    private ReservaExtensivel reservaBalas;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        var toquesNaTela = Input.touches;
+        foreach(var toque in toquesNaTela)
         {
-            Instantiate(Bala, CanoDaArma.transform.position, CanoDaArma.transform.rotation);
-            ControlaAudio.instancia.PlayOneShot(Somtiro);
+            if (toque.phase == TouchPhase.Began)
+            {
+                this.Atirar();
+                ControlaAudio.instancia.PlayOneShot(Somtiro);
+            }
+        }
+    }
+
+    private void Atirar()
+    {
+        if (this.reservaBalas.TemObjeto())
+        {
+            var bala = this.reservaBalas.PegarObjeto();
+            bala.transform.position = CanoDaArma.transform.position;
+            bala.transform.rotation = CanoDaArma.transform.rotation;
         }
     }
 }

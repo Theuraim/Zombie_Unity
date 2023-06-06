@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MovimentoPersonagem : MonoBehaviour
 {
-    private Rigidbody rBody;
     public Vector3 Direcao { get; protected set; }
+
+    private Rigidbody rBody;
+
 
     public void Awake()
     {
@@ -42,5 +44,11 @@ public class MovimentoPersonagem : MonoBehaviour
         rBody.velocity = Vector3.zero;
         rBody.isKinematic = false;
         GetComponent<Collider>().enabled = false;
+    }
+
+    public void Reiniciar()
+    {
+        rBody.isKinematic = true;
+        GetComponent<Collider>().enabled = true;
     }
 }

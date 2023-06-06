@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlaInimigo : MonoBehaviour, IMatavel
+public class ControlaInimigo : MonoBehaviour, IMatavel, IReservavel
 {
     public GameObject Jogador;
     private MovimentoPersonagem movimentoInimigo;
@@ -20,13 +20,24 @@ public class ControlaInimigo : MonoBehaviour, IMatavel
     public GeradorZumbis GeraZumbis;
     public GameObject ParticulaSangueZumbi;
 
+    private IReservaObjetos reserva;
+
+    public void SetReserva(IReservaObjetos reserva)
+    {
+        this.reserva = reserva;
+    }
+
+    public void Awake()
+    {
+        movimentoInimigo = GetComponent<MovimentoPersonagem>();
+        animacaoInimigo = GetComponent<AnimacaoPersonagem>();
+    }
+
     // Start is called before the first frame update
     public void Start()
     {
         //Setting important variables
         Jogador = GameObject.FindWithTag("Jogador");
-        movimentoInimigo = GetComponent<MovimentoPersonagem>();
-        animacaoInimigo = GetComponent<AnimacaoPersonagem>();
         statusInimigo = GetComponent<Status>();
         scriptControlaInterface = GameObject.FindObjectOfType(typeof(ControlaInterface)) as ControlaInterface;
 
@@ -95,14 +106,20 @@ public class ControlaInimigo : MonoBehaviour, IMatavel
 
     public void Morrer()
     {
-        Destroy(gameObject, 5);
+        Invoke("VoltarReserva", 5);
         animacaoInimigo.Morrer();
         this.enabled = false;
         movimentoInimigo.Morrer();
         ControlaAudio.instancia.PlayOneShot(SomMorte);
         VerificarGeracaoKitMedico(porcentagemGerarKitMedico);
         scriptControlaInterface.AtualizarQuantideZumbisMortos();
-        GeraZumbis.DiminuiQuantidadeZumbis();
+    }
+
+    private void VoltarReserva()
+    {
+        this.movimentoInimigo.Reiniciar();
+        this.enabled = true;
+        this.reserva.DevolverObjeto(this.gameObject);
     }
 
     private void Vagar()
@@ -139,5 +156,17 @@ public class ControlaInimigo : MonoBehaviour, IMatavel
         {
             Instantiate(KitMedicoPrefab, transform.position, Quaternion.identity);
         }
+    }
+
+    public void AoEntrarNaReserva()
+    {
+        this.movimentoInimigo.Reiniciar();
+        this.enabled = true;
+        this.gameObject.SetActive(false);
+    }
+
+    public void AoSairDaReserva()
+    {
+        this.gameObject.SetActive(true);
     }
 }
